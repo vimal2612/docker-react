@@ -1,0 +1,22 @@
+version: '3'
+services: 
+  web: 
+    restart: 'always'
+    build: 
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports: 
+      - '3001:3000'
+    volumes:
+      - /usr/vimalapp/node_modules
+      - .:/usr/vimalapp
+  
+  test: 
+    build: 
+      context: ./
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/vimalapp/node_modules
+      - .:/usr/vimalapp  
+    command: ["npm", "run", "test"]    
+
